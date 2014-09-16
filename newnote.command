@@ -4,11 +4,17 @@
 BASEDIR=$(dirname $0)
 cd $BASEDIR
  
-notesdirectory="`pwd`/notes/Personal"
-mkdir -p "${notesdirectory}"
 
 clear
+
+# Directory
+echo -n "Type directory name for note: "
+read directory
+notesdirectory="`pwd`/notes/${directory}"
+mkdir -p "${notesdirectory}"
 echo "Note will be stored in ${notesdirectory}."
+
+# File
 echo -n "Type title/filename for note (without extension): "
 read filename
 
@@ -27,4 +33,4 @@ fi
 rm -f lastnote.odt
 ln -s "${notesdirectory}/${filename}.odt" lastnote.odt
 
-open -a LibreOffice --args --writer "${notesdirectory}/${filename}.odt"
+open -n -a LibreOffice --args --writer "${notesdirectory}/${filename}.odt"
